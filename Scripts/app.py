@@ -24,14 +24,16 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
-@app.route("/<name>")
-def genre(name):
-    data = pd.read_sql(f"select * from world_films where genre like '%{name}%';",conn)
-    return data.to_json(orient="records")
+# @app.route("/<name>")
+# def genre(name):
+#     # data = pd.read_sql(f"select * from world_films where genre like '{name}'",conn)
+#     data = pd.read_sql("select * from world_films",conn)
+#     return data.to_json(orient="records")
 
-@app.route("/movies")
+@app.route("/api/movies")
 def movies():
-    data_country = pd.read_sql("select distinct latitude, longitude, country from world_films;",conn)
+    # data_country = pd.read_sql("select distinct latitude, longitude, country from world_films;",conn)
+    data_country = pd.read_sql("select country, avg(reviews_from_critics) as avg_rating, avg(latitude) as latitude, avg(longitude) as longitude from world_films group by country;",conn)
     return data_country.to_json(orient="records")
 
 @app.route("/")

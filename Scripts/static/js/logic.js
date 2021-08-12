@@ -1,6 +1,6 @@
 var myMap = L.map("map", {
-    center: [36.7783, -119.4179],
-    zoom: 5
+    center: [51.5074, 0.1278],
+    zoom: 2
 })
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -8,28 +8,29 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap)
 
 
-var url = "http://127.0.0.1:5000/movies"
+var url = "http://127.0.0.1:5000/api/movies"
 
 d3.json(url).then(function (data) {
-    console.log(data)
-    // console.log(data.features.length)
+    console.log("api test",data)
+    
 
-    // for (i = 0; i < data.features.length; i++) {
-    //     feature = data.features[i]
-    //     lon = feature.geometry.coordinates[0]
-    //     lat = feature.geometry.coordinates[1]
-    //     depth = feature.geometry.coordinates[2]
-    //     magnitude = feature.properties.mag
+    for (i = 0; i < data.length; i++) {
+        country = data[i]
+        lon = country["longitude"]
+        lat = country["latitude"]
+        country_name = country["country"]
+        rating = country["avg_rating"]
 
-    //     L.circle([lat, lon], {
-    //         radius: magnitude * 20000,
-    //         fillColor: getColor(depth),
-    //         color: "black",
-    //         weight: 0.75,
-    //         fillOpacity: 0.75
-    //     }).bindPopup("<b>"+feature.properties.place+"</b><br>"+`magnitude: ${magnitude} `).addTo(myMap)
 
-    // }
+        L.circle([lat, lon], {
+            radius: 100000,
+            fillColor: 'green',
+            color: "black",
+            weight: 0.75,
+            fillOpacity: 0.75
+        }).bindPopup("<h1>"+`${country_name}`+"</h1><br> <h3>Average rating: " +`${rating}` + "</h3>").addTo(myMap)
+
+    }
     
     // var legend = L.control({ position: 'bottomleft' });
     
