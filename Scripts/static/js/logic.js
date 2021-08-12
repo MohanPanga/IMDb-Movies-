@@ -8,7 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap)
 
 
-url = "http://127.0.0.1:5000/Drama"
+var url = "http://127.0.0.1:5000/movies"
 
 d3.json(url).then(function (data) {
     console.log(data)

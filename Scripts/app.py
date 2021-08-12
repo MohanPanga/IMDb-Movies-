@@ -26,13 +26,17 @@ app = Flask(__name__)
 
 @app.route("/<name>")
 def genre(name):
-
     data = pd.read_sql(f"select * from world_films where genre like '%{name}%';",conn)
-
     return data.to_json(orient="records")
+
+@app.route("/movies")
+def movies():
+    data_country = pd.read_sql("select distinct latitude, longitude, country from world_films;",conn)
+    return data_country.to_json(orient="records")
 
 @app.route("/")
 def index():
     return render_template("index.html") 
+
 if __name__ == '__main__':
     app.run(debug=True)
