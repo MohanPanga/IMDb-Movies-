@@ -94,10 +94,41 @@ d3.json("http://127.0.0.1:5000/Crime").then(function (data) {
 
         }
     });
-
-
-
-
-
 })
+
+d3.json("http://127.0.0.1:5000/country/Albania").then(function (data) {
+
+    console.log(data)
+    xlabel = data.map(a => a.genre)
+    ydata = data.map(a => a.nmovies)
+    bgcolors = data.map(a => getColor(a.nmovies))
+    bdrcolors = data.map(a => 'rgba(153, 102, 255, 1)')
+    console.log(ydata)
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    myChart2 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: xlabel,
+            datasets: [{
+                label: 'country',
+                data: ydata,
+                backgroundColor: bgcolors,
+                borderColor: bdrcolors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { text: "Total Movies", display: true, font: { size: 20 } }
+
+                }
+            }
+
+        }
+    });
+})
+
 var myChart
+var myChart2

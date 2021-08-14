@@ -37,6 +37,13 @@ def genre(name):
     # data = pd.read_sql("select * from world_films",conn)
     return data.to_json(orient="records")
 
+
+@app.route("/country/<name>")
+def moviecount(name):
+    data = pd.read_sql(f"select genre, count(title) as nmovies from world_films where country='{name}' group by genre",conn)
+    # data = pd.read_sql("select * from world_films",conn)
+    return data.to_json(orient="records")
+
 @app.route("/api/movies")
 def movies():
     # data_country = pd.read_sql("select distinct latitude, longitude, country from world_films;",conn)
@@ -48,8 +55,10 @@ def movies():
 @app.route("/")
 def index():
     data =  pd.read_sql("select distinct genre from world_films", conn)
+    data_country = pd.read_sql("select distinct country from world_films order by country", conn)
     genres = data.to_dict(orient="records")
-    return render_template("index.html", genres=genres)
+    countries = data_country.to_dict(orient="records")
+    return render_template("index.html", genres=genres, countries=countries)
 
 
 if __name__ == '__main__':

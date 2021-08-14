@@ -19,8 +19,8 @@
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
-<!-- <script src="../static/js/chartjs-plugin-colorschemes.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+  <!-- <script src="../static/js/chartjs-plugin-colorschemes.min.js"></script> -->
 
 
 </head>
@@ -28,32 +28,47 @@
 <body>
 
   <div class="container">
+
     <div class="row">
-      <h1 class ="display-1 text-center p-4 bg-primary">Movie Guru</h1>
+      <h1 class="display-1 text-center p-4 bg-primary">Movie Guru</h1>
     </div>
+
     <div class="row maprow">
-      <div class="col-3">
+      <div class="col">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2 p-3">
         <select name="genre" id="genre">
           {%for genre in genres%}
           <option value="{{genre.genre}}">{{genre.genre}}</option>
           {% endfor %}
         </select>
       </div>
-      <div class="col-9">
-        <div id="map"></div>
+      <div class="col-10 p-3 ">
+        <canvas id="myChart" width="400" height="300"></canvas>
       </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="myChart" width="400" height="300"></canvas>
-        </div>
-      </div>
-      <!-- <div class="col">
-        <h1>hello</h1>
-      </div> -->
-
     </div>
 
+    <div class="row">
+      <div class="col-2 p-3">
+        <select name="country" id="country">
+          {%for country in countries%}
+          <option value="{{country.country}}">{{country.country}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col p-3">
+        <canvas id="myChart2" width="400" height="300"></canvas>
+      </div>
+    </div>
+
+
   </div>
+
+  
   <!-- The div that holds our map -->
 
 
