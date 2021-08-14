@@ -11,7 +11,7 @@ from flask import Flask, jsonify, render_template
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql://postgres:Redcherry@localhost:5432/Imdb")
+engine = create_engine("postgresql://djc_1:test@localhost:5432/IMBD_films_db")
 conn = engine.connect()
 
 #################################################
