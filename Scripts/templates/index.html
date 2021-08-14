@@ -29,22 +29,22 @@
 
   <div class="container">
     <div class="row">
-      <h1>Movie Guru</h1>
+      <h1 class ="display-1 text-center p-4">Movie Guru</h1>
     </div>
     <div class="row maprow">
-      <div class="col">
+      <div class="col-3">
         <select name="genre" id="genre">
           {%for genre in genres%}
           <option value="{{genre.genre}}">{{genre.genre}}</option>
           {% endfor %}
         </select>
       </div>
-      <div class="col">
+      <div class="col-9">
         <div id="map"></div>
       </div>
       <div class="row">
         <div class="col">
-          <canvas id="myChart" width="400" height="400"></canvas>
+          <canvas id="myChart" width="400" height="300"></canvas>
         </div>
       </div>
       <!-- <div class="col">

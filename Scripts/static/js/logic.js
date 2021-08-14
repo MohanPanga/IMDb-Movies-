@@ -32,35 +32,6 @@ d3.json(url).then(function (data) {
 
     }
 
-    // var legend = L.control({ position: 'bottomleft' });
-
-    // legend.onAdd = function (map) {
-
-    //     var div = L.DomUtil.create('div', 'info legend'),
-    //         depths = [-10, 10, 20, 50, 100, 200, 500],
-    //         labels = [];
-
-    //     // loop through depth intervals and generate a label with a colored square for each interval
-    //     div.innerHTML = '<b>Depth Legend</b><br>';
-    //     for (var i = 0; i < depths.length; i++) {
-    //         div.innerHTML +=
-    //             '<i style="background:' + getColor(depths[i] + 1) + '"> &nbsp &nbsp </i> ' +
-    //             depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
-    //     }
-
-    //     return div;
-    // };
-    // function getColor(d) {
-    //     return d > 500 ? '#800026' :
-    //         d > 200 ? '#BD0026' :
-    //             d > 100 ? '#E31A1C' :
-    //                 d > 50 ? '#FC4E2A' :
-    //                     d > 20 ? '#FD8D3C' :
-    //                         d > 10 ? '#FEB24C' :
-    //                             d > -10 ? '#a1d99b' :
-    //                                 '#FFEDA0';
-    // }
-    // legend.addTo(myMap);
 }
 )
 
@@ -71,13 +42,13 @@ function updateBarchart() {
     console.log(selected_genre)
     let url = "http://127.0.0.1:5000/" + selected_genre.split(",")[0]
     console.log(url)
-    d3.json(url).then(function(data){
+    d3.json(url).then(function (data) {
         xlabel = data.map(a => a.country)
         ydata = data.map(a => a.avg_rating)
         bgcolors = data.map(a => getColor(a.avg_rating))
         bdrcolors = data.map(a => 'rgba(153, 102, 255, 1)')
         myChart.data.datasets[0].data = ydata
-        myChart.data.datasets[0].backgroundColor= bgcolors
+        myChart.data.datasets[0].backgroundColor = bgcolors
         myChart.data.labels = xlabel
         myChart.update()
     })
@@ -120,7 +91,7 @@ d3.json("http://127.0.0.1:5000/Crime").then(function (data) {
 
                 }
             }
-            
+
         }
     });
 
