@@ -55,7 +55,6 @@ function updateBarchart() {
 
 }
 
-
 function getColor(d) {
     return d > 7 ? 'green' :
         d > 5 ? 'yellow' :
