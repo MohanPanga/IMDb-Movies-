@@ -11,7 +11,7 @@ from flask import Flask, jsonify, render_template
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql://djc_1:test@localhost:5432/IMBD_films_db")
+engine = create_engine("postgresql://postgres:Redcherry@localhost:5432/Imdb")
 conn = engine.connect()
 
 #################################################
@@ -47,8 +47,7 @@ def moviecount(name):
 @app.route("/api/movies")
 def movies():
     # data_country = pd.read_sql("select distinct latitude, longitude, country from world_films;",conn)
-    data_country = pd.read_sql(
-        "select country, avg(reviews_from_critics) as avg_rating, avg(latitude) as latitude, avg(longitude) as longitude from world_films group by country;", conn)
+    data_country = pd.read_sql("select country, avg(reviews_from_critics) as avg_rating, avg(latitude) as latitude, avg(longitude) as longitude, count(title) as total_films from world_films group by country;", conn)
     return data_country.to_json(orient="records")
 
 

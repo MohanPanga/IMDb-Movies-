@@ -1,6 +1,6 @@
 var myMap = L.map("map", {
     center: [51.5074, 0.1278],
-    zoom: 2
+    zoom: 2.45
 })
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -20,15 +20,18 @@ d3.json(url).then(function (data) {
         lat = country["latitude"]
         country_name = country["country"]
         rating = country["avg_rating"]
-
+        rating = Math.round((rating + Number.EPSILON) * 100) / 100;
+        size = country["total_films"]
+        let size_circle = 500
+        if (size>500){size_circle=size}
 
         L.circle([lat, lon], {
-            radius: 100000,
-            fillColor: 'green',
-            color: "black",
-            weight: 0.75,
-            fillOpacity: 0.75
-        }).bindPopup("<h1>" + `${country_name}` + "</h1><br> <h3>Average rating: " + `${rating}` + "</h3>").addTo(myMap)
+            radius: 90*size_circle,
+            fillColor: 'red',
+            color: "gray",
+            weight: 0.2,
+            fillOpacity: 0.5
+        }).bindPopup("<h1>" + `${country_name}` + "</h1><br><h3>Movies: "+`${size}`+"</h3><br><h3>Average rating: " + `${rating}` + "</h3>").addTo(myMap)
 
     }
 
@@ -75,7 +78,7 @@ d3.json("http://127.0.0.1:5000/Crime").then(function (data) {
         data: {
             labels: xlabel,
             datasets: [{
-                label: 'country',
+                label: '',
                 data: ydata,
                 backgroundColor: bgcolors,
                 borderColor: bdrcolors,
@@ -109,7 +112,7 @@ d3.json("http://127.0.0.1:5000/country/Albania").then(function (data) {
         data: {
             labels: xlabel,
             datasets: [{
-                label: 'country',
+                label: '',
                 data: ydata,
                 backgroundColor: bgcolors,
                 borderColor: bdrcolors,
