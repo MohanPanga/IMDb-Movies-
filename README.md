@@ -1,2 +1,3 @@
 # IMDb-Movies-
-Analysis of movie information on IMDb
+
+![Movies by Country](/Images/dashboard.png)
